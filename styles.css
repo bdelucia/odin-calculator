@@ -23,6 +23,19 @@ body {
 .inputs {
     display: flex;
     flex-basis: 90%;
+    gap: 20px;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 80%;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.operators {
+    flex-basis: 20%;
     background-color: white;
     border: 1px solid black;
 }

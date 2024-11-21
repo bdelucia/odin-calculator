@@ -3,6 +3,9 @@ let operator = "";
 let operand2 = 0;
 let result = 0;
 
+const numbers = document.querySelector(".numbers");
+const operators = document.querySelector(".operators");
+
 function add(a, b){ return a + b;}
 function subtract(a, b){ return a - b;}
 function multiply(a, b){ return a * b;}
@@ -32,5 +35,17 @@ function operate(operand1, operator, operand2){
             break;
     }
 }
+// Initializes divs for the input numbers, sets up grid
+for(let i = 0; i < 4; i++){
+    for(let j = 0; j < 3; j++){
+        const digitBox = document.createElement("div");
+        digitBox.style.flexBasis = `calc(33.333%)`;
+        digitBox.style.boxSizing = "border-box";
+        digitBox.style.border = "1px solid black";
+
+        numbers.appendChild(digitBox);
+    }
+}
+
 
 console.log(operate(1, '+', 3));
