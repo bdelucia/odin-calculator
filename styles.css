@@ -41,3 +41,26 @@ body {
     background-color: white;
     border: 1px solid black;
 }
+
+.numbers div {
+    flex-basis: calc(33.33%);
+    box-sizing: border-box;
+    border: 1px solid black;
+    
+    /* Flexbox for centering content */
+    display: flex;
+    align-items: center;  /* Vertically center */
+    justify-content: center;  /* Horizontally center */
+    font-size: 100px;  /* Adjust font size as needed */
+}
+
+.operators div {
+    flex-basis: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+
+    display: flex;
+    align-items: center;  /* Vertically center */
+    justify-content: center;  /* Horizontally center */
+    font-size: 50px; 
+}

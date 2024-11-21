@@ -3,6 +3,22 @@ let operator = "";
 let operand2 = 0;
 let result = 0;
 
+const calculatorLayout = [
+    ["7","8","9"],
+    ["4","5","6"],
+    ["1","2","3"],
+    ["0",".", "+/-"]
+]
+
+const operatorsLayout = [
+    'Clear',
+    '+',
+    '-',
+    'x',
+    '/',
+    '='
+]
+
 const numbers = document.querySelector(".numbers");
 const operators = document.querySelector(".operators");
 
@@ -37,20 +53,22 @@ function operate(operand1, operator, operand2){
 }
 
 // Initializes 3x4 grid and number input divs
-for(let i = 0; i < 12; i++){
-    const digitBox = document.createElement("div");
-    digitBox.style.flexBasis = `calc(33.333%)`;
-    digitBox.style.boxSizing = "border-box";
-    digitBox.style.border = "1px solid black";
+for(let i = 0; i < calculatorLayout.length; i++){
+    for(let j = 0; j < calculatorLayout[i].length; j++){
+        const digitBox = document.createElement("div");
+        digitBox.textContent = calculatorLayout[i][j];
+        digitBox.classList.add('button');
+        digitBox.setAttribute('id', calculatorLayout[i][j])
 
-    numbers.appendChild(digitBox);
+        numbers.appendChild(digitBox);
+    }
 }
 
 for(let i = 0; i < 6; i++){
     const operatorBox = document.createElement("div");
-    operatorBox.style.flexBasis = "100%";
-    operatorBox.style.boxSizing = "border-box";
-    operatorBox.style.border = "1px solid black";
+    operatorBox.textContent = operatorsLayout[i];
+    digitBox.classList.add('button');
+    operatorBox.setAttribute('id', operatorsLayout[i]);
 
     operators.appendChild(operatorBox);
 }
