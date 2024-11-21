@@ -46,5 +46,13 @@ for(let i = 0; i < 12; i++){
     numbers.appendChild(digitBox);
 }
 
+for(let i = 0; i < 6; i++){
+    const operatorBox = document.createElement("div");
+    operatorBox.style.flexBasis = "100%";
+    operatorBox.style.boxSizing = "border-box";
+    operatorBox.style.border = "1px solid black";
+
+    operators.appendChild(operatorBox);
+}
 
 console.log(operate(1, '+', 3));

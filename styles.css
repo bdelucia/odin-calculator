@@ -35,6 +35,8 @@ body {
 }
 
 .operators {
+    display: flex;
+    flex-wrap: wrap;
     flex-basis: 20%;
     background-color: white;
     border: 1px solid black;
