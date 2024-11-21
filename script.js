@@ -35,16 +35,15 @@ function operate(operand1, operator, operand2){
             break;
     }
 }
-// Initializes divs for the input numbers, sets up grid
-for(let i = 0; i < 4; i++){
-    for(let j = 0; j < 3; j++){
-        const digitBox = document.createElement("div");
-        digitBox.style.flexBasis = `calc(33.333%)`;
-        digitBox.style.boxSizing = "border-box";
-        digitBox.style.border = "1px solid black";
 
-        numbers.appendChild(digitBox);
-    }
+// Initializes 3x4 grid and number input divs
+for(let i = 0; i < 12; i++){
+    const digitBox = document.createElement("div");
+    digitBox.style.flexBasis = `calc(33.333%)`;
+    digitBox.style.boxSizing = "border-box";
+    digitBox.style.border = "1px solid black";
+
+    numbers.appendChild(digitBox);
 }
 
 
