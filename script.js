@@ -73,4 +73,15 @@ for(let i = 0; i < 6; i++){
     operators.appendChild(operatorBox);
 }
 
+const buttons = document.querySelectorAll(".button");
+buttons.forEach((button) => {
+    button.addEventListener("mouseover", function() {
+        button.style.backgroundColor = `rgb(0, 0, 255, 0.1)`;
+    })
+    button.addEventListener("mouseout", function() {
+        button.style.backgroundColor = "white";
+    })
+    
+})
+
 console.log(operate(1, '+', 3));

@@ -15,9 +15,13 @@ body {
 }
 
 .display {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
     background-color: white;
     border: 1px solid black;
     flex-basis: 10%;
+    font-size: 50px;
 }
 
 .inputs {
