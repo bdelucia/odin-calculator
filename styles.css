@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 900px;
+    width: 800px;
+    background-color: lightgrey;
+    padding: 20px;
+    gap: 40px;
+}
+
+.display {
+    background-color: white;
+    border: 1px solid black;
+    flex-basis: 10%;
+}
+
+.inputs {
+    display: flex;
+    flex-basis: 90%;
+    background-color: white;
+    border: 1px solid black;
+}
