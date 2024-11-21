@@ -67,7 +67,7 @@ for(let i = 0; i < calculatorLayout.length; i++){
 for(let i = 0; i < 6; i++){
     const operatorBox = document.createElement("div");
     operatorBox.textContent = operatorsLayout[i];
-    digitBox.classList.add('button');
+    operatorBox.classList.add('button');
     operatorBox.setAttribute('id', operatorsLayout[i]);
 
     operators.appendChild(operatorBox);
