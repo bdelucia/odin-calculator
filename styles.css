@@ -15,6 +15,7 @@ body {
     height: 700px;
     width: 800px;
     background-color: #000;
+    border-radius: 24px;
 
     padding: 20px;
     gap: 40px;
