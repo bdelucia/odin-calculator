@@ -165,10 +165,14 @@ for(let i = 0; i < 6; i++){
 const buttons = document.querySelectorAll(".button");
 buttons.forEach((button) => {
     button.addEventListener("mouseover", function() {
-        button.style.backgroundColor = `rgb(0, 0, 255, 0.1)`;
+        button.style.backgroundColor = `rgb(255, 255, 255, 0.1)`;
+        button.style.color = "white";
+        button.style.textShadow = "0 0 5px #f6f5f4, 0 0 10px #f6f5f4, 0 0 20px #f6f5f4"
     })
     button.addEventListener("mouseout", function() {
-        button.style.backgroundColor = "white";
+        button.style.backgroundColor = "rgb(36, 35, 35)";
+        button.style.color = "cyan";
+        button.style.textShadow = "0 0 5px #f6f5f4, 0 0 10px #f6f5f4, 0 0 20px #f6f5f4"
     })
     button.addEventListener("click", function() {
         updateDisplay(button);
