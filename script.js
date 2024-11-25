@@ -121,15 +121,17 @@ function doOperate(button){
     isNewNumber = true; // gets ready for next input by not allowing for input to be appended to result
 }
 
+// Handles display of numbers, called when digit buttons (0-9, ".") are pressed or running total is displayed after operator button press
 function displayNumbers(number){
+    // base case, if creating new number, set to false and reset display temporarily
     if(isNewNumber){
         isNewNumber = false;
         display.textContent = "";
     }
 
-    if(display.textContent === "0" && number === ".")
+    if(display.textContent === "" && number === ".") // Adds 0 to front of "." if it is the first input for nice appearance
         display.textContent = "0.";
-    else if(display.textContent.includes(".") && number === ".")
+    else if(display.textContent.includes(".") && number === ".") // if displayed number already has a "."
         return;
     else if(display.textContent === "0")
         display.textContent = number
@@ -149,6 +151,7 @@ for(let i = 0; i < calculatorLayout.length; i++){
     }
 }
 
+// Initializes operator 1x6 grid and input divs
 for(let i = 0; i < 6; i++){
     const operatorBox = document.createElement("div");
     operatorBox.textContent = operatorsLayout[i];
@@ -158,6 +161,7 @@ for(let i = 0; i < 6; i++){
     operators.appendChild(operatorBox);
 }
 
+// Add event handlers for each button
 const buttons = document.querySelectorAll(".button");
 buttons.forEach((button) => {
     button.addEventListener("mouseover", function() {
