@@ -5,8 +5,7 @@ let result = 0;
 let displayMessage = "";
 let isNewNumber = true;
 
-let expressions = [];
-
+// i used this 2D array to easily make initialize the divs easier
 const calculatorLayout = [
     ["7","8","9"],
     ["4","5","6"],
@@ -14,8 +13,10 @@ const calculatorLayout = [
     ["0",".", "+/-"]
 ]
 
+// helps check if a button is in the calculator layout, flattens 2D array to 1D for checking
 const flatCalcLayout = calculatorLayout.flat();
 
+// array for operators flexbox layout
 const operatorsLayout = [
     'AC',
     '+',
@@ -25,58 +26,48 @@ const operatorsLayout = [
     '='
 ]
 
+// selecting each flexbox
 const numbers = document.querySelector(".numbers");
 const operators = document.querySelector(".operators");
 const display = document.querySelector(".display");
 
+// functions for use in parent function operate
 function add(a, b){ return a + b;}
 function subtract(a, b){ return a - b;}
 function multiply(a, b){ return a * b;}
 function divide(a, b){ return a / b;}
 
+// calculates the result of 2 given operands and an operator (+, -, x, /)
 function operate(operand1, operator, operand2){
     let result = 0;
-    // base case, check if inputs are valid
+    // base case, check if inputs are of valid type
     if(typeof(operand1) !== "number" || typeof(operator) !== "string" || typeof(operand2) !== "number")
-        return NaN;
+        return "Invalid input type(s)";
 
     switch (operator){
         case '+':
             result = add(operand1, operand2);
-            //console.log(result);
             break;
         case '-':
             result = subtract(operand1, operand2);
-            //console.log(result);
             break;
         case 'x': 
             result = multiply(operand1, operand2);
-            //console.log(result);
             break;
         case '/':
             result = divide(operand1, operand2);
-            //console.log(result);
             break;
     }
     return result;
 }
 
-function updateExpression(operator, operand){
-    let result = 0;
-    expressions.push(operand);
-    expressions.push(operator);
-    
-    console.log("After updateExpression: ", expressions);
-    return expressions;
-}
-
+// Sets display and operand1 back to 0
 function clearDisplay(){
     display.textContent = "0"
     operand1 = 0;
-    expressions.length = 0;
-    console.log("Expressions cleared!")
 }
 
+// Adds/removes negative sign
 function changeNumberSign(){
     if(display.textContent.charAt(0) !== "-")
         display.textContent = ["-", display.textContent].join("");
@@ -84,6 +75,8 @@ function changeNumberSign(){
         display.textContent = display.textContent.slice(1);
 }
 
+
+// All buttons call this first, runs functions based on button id
 function updateDisplay(button){
     if(button.id === "AC"){
         clearDisplay();
@@ -93,18 +86,18 @@ function updateDisplay(button){
         return;
     }
 
+    // if button.id is an input digit (0-9, ".")
     if(flatCalcLayout.includes(button.id)){
         displayNumbers(button.id);
     } else {
-        doOperate(button);
+        doOperate(button); // each time an operator button is pressed, call function that updates operand1
     }
 }
 
+// Called each time an operator button is pressed (+, -, x, /, =)
 function doOperate(button){
-    console.log("operator: ", operator);
-    console.log("isNewNumber: ", isNewNumber);
+    // setting the operator and operand base case
     if(operator === null || isNewNumber === true){
-        console.log("Operator is null and new number is true")
         if(button.id !== "=")
             operator = button.id;
         operand1 = display.textContent;
@@ -117,14 +110,15 @@ function doOperate(button){
     console.log("Operand2: ", display.textContent);
     operand1 = operate(parseFloat(operand1), operator, parseFloat(display.textContent));
 
+    // operator buttons already calculate expressions, so = just needs to do the one stored instead of appending another expression.
     if(button.id === "=")
         operator = null;
     else
         operator = button.id;
 
-    isNewNumber = true;
-    displayNumbers(operand1);
-    isNewNumber = true;
+    isNewNumber = true; // prevents current result from being appended to current display
+    displayNumbers(parseFloat(operand1.toFixed(10))); // displays the result
+    isNewNumber = true; // gets ready for next input by not allowing for input to be appended to result
 }
 
 function displayNumbers(number){
