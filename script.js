@@ -3,8 +3,7 @@ let operator = null;
 let operand2 = null;
 let result = 0;
 let displayMessage = "";
-let digitsPressed = false;
-let acceptingOperand2 = false;
+let isNewNumber = true;
 
 let expressions = [];
 
@@ -14,6 +13,8 @@ const calculatorLayout = [
     ["1","2","3"],
     ["0",".", "+/-"]
 ]
+
+const flatCalcLayout = calculatorLayout.flat();
 
 const operatorsLayout = [
     'AC',
@@ -62,41 +63,84 @@ function operate(operand1, operator, operand2){
 
 function updateExpression(operator, operand){
     let result = 0;
-    if(expressions.length === 2){
-        expressions.push(operand);
-        result = calculate(expressions);
-        expressions.length = 0;
-        expressions[0] = result;
-        display.textContent = result;
-    } else if (expressions.length === 1){
-        expressions.push(operator);
-        expressions.push(operand)
-        result = calculate(expressions);
-        expressions.length = 0;
-        expressions[0] = result;
-        display.textContent = result;
-    } else {
-        expressions.push(operand);
-        expressions.push(operator);
-    }
+    expressions.push(operand);
+    expressions.push(operator);
+    
     console.log("After updateExpression: ", expressions);
     return expressions;
 }
 
-function calculate(expressionArray){
-    let result = 0;
-    let operand1 = parseFloat(expressionArray[0]);
-    let operator = expressionArray[1];
-    let operand2 = parseFloat(expressionArray[2]);
-    
-    result = operate(operand1, operator, operand2);
-    console.log("Operand 1: ", operand1);
-    console.log("Operator: ", operator);
-    console.log("Operand 2: ", operand2);
-    console.log("Expression to calculate: ", expressionArray);
-    console.log("Result of expression: ", result);
+function clearDisplay(){
+    display.textContent = "0"
+    operand1 = 0;
+    expressions.length = 0;
+    console.log("Expressions cleared!")
+}
 
-    return result;
+function changeNumberSign(){
+    if(display.textContent.charAt(0) !== "-")
+        display.textContent = ["-", display.textContent].join("");
+    else
+        display.textContent = display.textContent.slice(1);
+}
+
+function updateDisplay(button){
+    if(button.id === "AC"){
+        clearDisplay();
+        return;
+    } else if (button.id === "+/-"){
+        changeNumberSign();
+        return;
+    }
+
+    if(flatCalcLayout.includes(button.id)){
+        displayNumbers(button.id);
+    } else {
+        doOperate(button);
+    }
+}
+
+function doOperate(button){
+    console.log("operator: ", operator);
+    console.log("isNewNumber: ", isNewNumber);
+    if(operator === null || isNewNumber === true){
+        console.log("Operator is null and new number is true")
+        if(button.id !== "=")
+            operator = button.id;
+        operand1 = display.textContent;
+        isNewNumber = true;
+        return;
+    }
+
+    console.log("Operand1: ", operand1);
+    console.log("Operator: ", operator);
+    console.log("Operand2: ", display.textContent);
+    operand1 = operate(parseFloat(operand1), operator, parseFloat(display.textContent));
+
+    if(button.id === "=")
+        operator = null;
+    else
+        operator = button.id;
+
+    isNewNumber = true;
+    displayNumbers(operand1);
+    isNewNumber = true;
+}
+
+function displayNumbers(number){
+    if(isNewNumber){
+        isNewNumber = false;
+        display.textContent = "";
+    }
+
+    if(display.textContent === "0" && number === ".")
+        display.textContent = "0.";
+    else if(display.textContent.includes(".") && number === ".")
+        return;
+    else if(display.textContent === "0")
+        display.textContent = number
+    else
+        display.textContent += number;
 }
 
 // Initializes 3x4 grid and number input divs
@@ -129,53 +173,6 @@ buttons.forEach((button) => {
         button.style.backgroundColor = "white";
     })
     button.addEventListener("click", function() {
-        switch (button.id){
-            case 'AC':
-                display.textContent = "0"
-                operand1 = 0;
-                expressions.length = 0;
-                console.log("Expressions cleared!")
-                break;
-            case '+/-':
-                if(display.textContent.charAt(0) !== "-")
-                    display.textContent = ["-", display.textContent].join("");
-                else
-                    display.textContent = display.textContent.slice(1);
-                break;
-            case ".":
-                display.textContent += button.id; 
-                break;
-            case "+":
-                updateExpression(button.id, display.textContent);
-                break;
-            case "-":
-                updateExpression(button.id, display.textContent);
-                break;
-            case "x":
-                updateExpression(button.id, display.textContent);
-                break;
-            case "/":
-                updateExpression(button.id, display.textContent);
-                break;
-            case "=":
-                expressions.push(display.textContent)
-                break;
-            default:
-                if(expressions.length && display.textContent === expressions[expressions.length - 2]){
-                    display.textContent = button.id;
-                    break;
-                }
-
-                    
-                if(display.textContent === '0' || expressions.length)
-                    display.textContent = button.id;
-                else
-                    display.textContent += button.id;
-
-        }
-
-
+        updateDisplay(button);
     }) 
 })
-
-console.log(operate(1, '+', 3));
