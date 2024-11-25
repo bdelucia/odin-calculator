@@ -12,15 +12,18 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    height: 600px;
-    width: 500px;
+    height: 700px;
+    width: 800px;
     background-color: #000;
-
-    border: 20px solid gray;
-    border-radius: 12px;
 
     padding: 20px;
     gap: 40px;
+}
+
+.titleBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .title {
@@ -29,14 +32,15 @@ body {
     justify-content: center;
 
     font-size: 36px;
-    flex-basis: 0%;
+    width: max-content;
     font-style: italic;
+    padding: 8px;
 
     border: 2px solid white;
     border-radius: 40px;
 
     color: cyan; /* Text color */
-    text-shadow: 0 0 5px #f6f5f4, 0 0 10px #f6f5f4, 0 0 20px #f6f5f4;
+    text-shadow: 0 0 5px cyan, 0 0 10px cyan, 0 0 20px cyan;
     font-size: 2rem; /* Increase font size for better visibility */
 }
 
@@ -51,7 +55,7 @@ body {
     font-size: 50px;
 
     color: cyan;
-    text-shadow: 0 0 5px #f6f5f4, 0 0 10px #f6f5f4, 0 0 20px #f6f5f4;
+    text-shadow: 0 0 5px cyan, 0 0 10px cyan, 0 0 20px cyan;
 
 }
 
@@ -71,7 +75,7 @@ body {
     border-radius: 8px;
 
     color: cyan;
-    text-shadow: 0 0 5px #f6f5f4, 0 0 10px #f6f5f4, 0 0 20px #f6f5f4;
+    text-shadow: 0 0 5px cyan, 0 0 10px cyan, 0 0 20px cyan;
 }
 
 .operators {
@@ -84,7 +88,7 @@ body {
     border-radius: 8px;
 
     color: cyan;
-    text-shadow: 0 0 5px #f6f5f4, 0 0 10px #f6f5f4, 0 0 20px #f6f5f4;
+    text-shadow: 0 0 5px cyan, 0 0 10px cyan, 0 0 20px cyan;
 }
 
 .numbers div {

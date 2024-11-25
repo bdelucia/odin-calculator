@@ -55,6 +55,10 @@ function operate(operand1, operator, operand2){
             result = multiply(operand1, operand2);
             break;
         case '/':
+            if(operand2 === 0){
+                result = "You can't divide by 0 silly"
+                break;
+            }
             result = divide(operand1, operand2);
             break;
     }
@@ -108,17 +112,26 @@ function doOperate(button){
     console.log("Operand1: ", operand1);
     console.log("Operator: ", operator);
     console.log("Operand2: ", display.textContent);
-    operand1 = operate(parseFloat(operand1), operator, parseFloat(display.textContent));
 
-    // operator buttons already calculate expressions, so = just needs to do the one stored instead of appending another expression.
-    if(button.id === "=")
-        operator = null;
-    else
-        operator = button.id;
+    if(operator === "/" && display.textContent === "0"){
+        console.log("Dividing by 0 is illegal")
+        isNewNumber = true;
+        displayNumbers("ERROR 808: No dividing by 0")
+        isNewNumber = true; 
+    } else {
+        operand1 = operate(parseFloat(operand1), operator, parseFloat(display.textContent));
 
-    isNewNumber = true; // prevents current result from being appended to current display
-    displayNumbers(parseFloat(operand1.toFixed(10))); // displays the result
-    isNewNumber = true; // gets ready for next input by not allowing for input to be appended to result
+        // operator buttons already calculate expressions, so = just needs to do the one stored instead of appending another expression.
+        if(button.id === "=")
+            operator = null;
+        else
+            operator = button.id;
+
+        isNewNumber = true; // prevents current result from being appended to current display
+        displayNumbers(parseFloat(operand1.toFixed(10))); // displays the result
+        isNewNumber = true; // gets ready for next input by not allowing for input to be appended to result
+    }
+    
 }
 
 // Handles display of numbers, called when digit buttons (0-9, ".") are pressed or running total is displayed after operator button press
@@ -167,12 +180,12 @@ buttons.forEach((button) => {
     button.addEventListener("mouseover", function() {
         button.style.backgroundColor = `rgb(255, 255, 255, 0.1)`;
         button.style.color = "white";
-        button.style.textShadow = "0 0 5px #f6f5f4, 0 0 10px #f6f5f4, 0 0 20px #f6f5f4"
+        button.style.textShadow = "0 0 5px cyan, 0 0 10px cyan, 0 0 20px cyan"
     })
     button.addEventListener("mouseout", function() {
         button.style.backgroundColor = "rgb(36, 35, 35)";
         button.style.color = "cyan";
-        button.style.textShadow = "0 0 5px #f6f5f4, 0 0 10px #f6f5f4, 0 0 20px #f6f5f4"
+        button.style.textShadow = "0 0 5px cyan, 0 0 10px cyan, 0 0 20px cyan"
     })
     button.addEventListener("click", function() {
         updateDisplay(button);
